@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{# winkelmand.twig #}
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -10,29 +11,34 @@
         {% for product in productenLijst %}
             <li>
                 <strong>{{ product.getNaam() }}</strong> – €{{ product.getPrijs() }}
+                {% if product.getPromotieprijs() %}
+                    <span style="color:red;">Promo: €{{ product.getPromotieprijs() }}</span>
+                {% endif %}
                 <form action="winkelmandController.php" method="post" style="display:inline">
                     <input type="hidden" name="id" value="{{ product.getId() }}">
-                    <button type="submit" name="actie" value="toevoegen">Toevoegen aan mandje</button>
+                    <input type="number" name="aantal" value="1" min="1" style="width:50px;">
+                    <button type="submit" name="actie" value="toevoegen">Toevoegen</button>
                 </form>
             </li>
         {% endfor %}
     </ul>
 
     <h2>Winkelmandje</h2>
-    <ul>
-        {% for item in winkelmandje %}
-            <li>
-                {{ item.product.getNaam() }} - Aantal: {{ item.aantal }}
-                <form action="winkelmandController.php" method="post" style="display:inline">
-                    <input type="hidden" name="id" value="{{ item.product.getId() }}">
-                    <button type="submit" name="actie" value="verwijderen">Verwijderen</button>
-                </form>
-            </li>
-        {% else %}
-            <li><em>Je winkelmandje is leeg</em></li>
-        {% endfor %}
-    </ul>
-
-    <a href="afrekenenController.php">Afrekenen</a>
+    {% if winkelmandje %}
+        <ul>
+            {% for item in winkelmandje %}
+                <li>
+                    {{ item.product.getNaam() }} - Aantal: {{ item.aantal }}
+                    <form action="winkelmandController.php" method="post" style="display:inline">
+                        <input type="hidden" name="id" value="{{ item.product.getId() }}">
+                        <button type="submit" name="actie" value="verwijderen">Verwijderen</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="afrekenenController.php">Afrekenen</a>
+    {% else %}
+        <p><em>Je winkelmandje is leeg</em></p>
+    {% endif %}
 </body>
 </html>

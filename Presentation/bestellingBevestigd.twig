@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Bestelling Bevestigd</title>
+</head>
+<body>
+    <h1>Bedankt voor je bestelling!</h1>
+
+    <h2>Bestellingsgegevens</h2>
+    <p><strong>Datum:</strong> {{ bestelling.datum }}</p>
+    <p><strong>Adres:</strong> {{ bestelling.adres }}</p>
+    <p><strong>Totaalprijs:</strong> €{{ bestelling.totaalprijs|number_format(2, ',', '.') }}</p>
+
+    <h3>Bestelde producten</h3>
+    <ul>
+        {% for lijn in bestelling.bestellijnen %}
+            <li>
+                {{ lijn.productNaam }}  
+                - Aantal: {{ lijn.aantal }}  
+                - Prijs per stuk: €{{ lijn.prijs|number_format(2, ',', '.') }}
+                - Subtotaal: €{{ (lijn.prijs * lijn.aantal)|number_format(2, ',', '.') }}
+            </li>
+        {% endfor %}
+    </ul>
+
+    <p><strong>Totaalprijs winkelmandje: €{{ bestelling.totaalprijs|number_format(2, ',', '.') }}</strong></p>
+
+    <a href="index.php">Terug naar winkel</a>
+</body>
+</html>

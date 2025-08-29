@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{# productlijst.twig #}
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
@@ -6,6 +7,9 @@
 </head>
 <body>
     <h1>Ons aanbod pizza's</h1>
+
+    <a href="winkelmandController.php">Ga naar winkelmandje</a>
+
     <ul>
         {% for product in productenLijst %}
             <li>
@@ -16,6 +20,12 @@
                 {% if product.getBeschrijving() %}
                     <p>{{ product.getBeschrijving() }}</p>
                 {% endif %}
+
+                <!-- Optioneel: direct toevoegen aan winkelmand -->
+                <form action="winkelmandController.php" method="post" style="display:inline">
+                    <input type="hidden" name="id" value="{{ product.getId() }}">
+                    <button type="submit" name="actie" value="toevoegen">Toevoegen aan mandje</button>
+                </form>
             </li>
         {% else %}
             <li><em>Geen producten gevonden...</em></li>

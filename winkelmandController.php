@@ -13,14 +13,15 @@ $productSvc = new ProductService();
 // Actie ophalen uit POST
 $actie = $_POST['actie'] ?? null;
 $productId = isset($_POST['id']) ? (int)$_POST['id'] : null;
+$aantal = isset($_POST['aantal']) ? (int)$_POST['aantal'] : 1;
 
 if ($actie && $productId) {
     switch ($actie) {
         case 'toevoegen':
             if (isset($_SESSION['winkelmandje'][$productId])) {
-                $_SESSION['winkelmandje'][$productId]++;
+                $_SESSION['winkelmandje'][$productId] += $aantal;
             } else {
-                $_SESSION['winkelmandje'][$productId] = 1;
+                $_SESSION['winkelmandje'][$productId] = $aantal;
             }
             break;
         case 'verwijderen':
