@@ -1,0 +1,20 @@
+{
+    "name": "11900562/pizzeria",
+    "autoload": {
+        "psr-4": {
+            "Business\\": "Business/",
+            "Data\\": "Data/",
+            "Entities\\": "Entities/",
+            "Exceptions\\": "Exceptions/"
+        }
+    },
+    "authors": [
+        {
+            "name": "TomKwanten",
+            "email": "tomkwanten2001@gmail.com"
+        }
+    ],
+    "require": {
+        "twig/twig": "^3.21"
+    }
+}

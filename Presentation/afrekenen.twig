@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- afrekenen.twig -->
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Afrekenen</title>
+</head>
+<body>
+    <h1>Afrekenen</h1>
+
+    {% if foutmelding %}
+        <p style="color:red;">{{ foutmelding }}</p>
+    {% endif %}
+
+    {% if not ingelogd %}
+        <h2>Login of registreer</h2>
+
+        <!-- LOGIN FORMULIER -->
+        <form action="" method="post">
+            <h3>Ik heb een account</h3>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="wachtwoord" placeholder="Wachtwoord" required>
+            <button type="submit" name="actie" value="login">Login</button>
+        </form>
+
+        <!-- REGISTRATIE FORMULIER -->
+        <form action="" method="post">
+            <h3>Ik heb geen account</h3>
+            <input type="text" name="voornaam" placeholder="Voornaam" required>
+            <input type="text" name="naam" placeholder="Naam" required>
+            <input type="text" name="straat" placeholder="Straat" required>
+            <input type="text" name="huisnummer" placeholder="Huisnummer" required>
+            <input type="text" name="postcode" placeholder="Postcode" required>
+            <input type="text" name="gemeente" placeholder="Gemeente" required>
+            <input type="text" name="telefoon" placeholder="Telefoon">
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="wachtwoord" placeholder="Wachtwoord" required>
+            <button type="submit" name="actie" value="registratie">Registreer</button>
+        </form>
+    {% else %}
+        <form action="" method="post" style="margin-bottom: 20px;">
+            <button type="submit" name="actie" value="logout">Uitloggen</button>
+        </form>
+        <h2>Overzicht winkelmandje</h2>
+        <ul>
+            {% set totaalPrijs = 0 %}
+            {% for item in winkelmandje %}
+                {% set subtotaal = item.aantal * item.prijs %}
+                <li>{{ item.product.getNaam() }} - Aantal: {{ item.aantal }} - €{{ subtotaal|number_format(2, ',', '.') }}</li>
+                {% set totaalPrijs = totaalPrijs + subtotaal %}
+            {% endfor %}
+        </ul>
+        <p><strong>Totaalprijs: €{{ totaalPrijs|number_format(2, ',', '.') }}</strong></p>
+
+        <h3>Adresgegevens</h3>
+        <form action="bestellingBevestigenController.php" method="post">
+            <input type="text" name="straat" placeholder="Straat" value="{{ ingelogd.straat }}" required>
+            <input type="text" name="huisnummer" placeholder="Huisnummer" value="{{ ingelogd.huisnummer }}" required>
+            <input type="text" name="postcode" placeholder="Postcode" value="{{ ingelogd.postcode }}" required>
+            <input type="text" name="gemeente" placeholder="Gemeente" value="{{ ingelogd.gemeente }}" required>
+            <button type="submit">Bevestig bestelling</button>
+        </form>
+    {% endif %}
+</body>
+</html>

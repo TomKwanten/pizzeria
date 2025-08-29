@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizzeria - Producten</title>
+</head>
+<body>
+    <h1>Ons aanbod pizza's</h1>
+    <ul>
+        {% for product in productenLijst %}
+            <li>
+                <strong>{{ product.getNaam() }}</strong> – €{{ product.getPrijs() }}
+                {% if product.getPromotieprijs() %}
+                    <span style="color: red;">Promo: €{{ product.getPromotieprijs() }}</span>
+                {% endif %}
+                {% if product.getBeschrijving() %}
+                    <p>{{ product.getBeschrijving() }}</p>
+                {% endif %}
+            </li>
+        {% else %}
+            <li><em>Geen producten gevonden...</em></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
