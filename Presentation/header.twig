@@ -1,0 +1,15 @@
+<header style="margin-bottom: 20px;">
+    <nav>
+        <a href="productController.php">Producten</a> |
+        <a href="winkelmandController.php">Winkelmandje ({{ winkelmandjeAantal|default(0) }})</a> |
+        {% if ingelogd %}
+            <span>Welkom, {{ ingelogd.voornaam }}</span>
+            <form action="afrekenenController.php" method="post" style="display:inline">
+                <button type="submit" name="actie" value="logout">Uitloggen</button>
+            </form>
+        {% else %}
+            <a href="afrekenenController.php">Login / Registreren</a>
+        {% endif %}
+    </nav>
+</header>
+<hr>

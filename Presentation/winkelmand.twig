@@ -6,6 +6,12 @@
     <title>Pizzeria - Winkelmandje</title>
 </head>
 <body>
+
+    {% include 'header.twig' with {
+        'winkelmandjeAantal': winkelmandje|length,
+        'ingelogd': ingelogd
+    } %}
+    
     <h1>Ons aanbod pizza's</h1>
     <ul>
         {% for product in productenLijst %}

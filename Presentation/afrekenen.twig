@@ -6,6 +6,12 @@
     <title>Afrekenen</title>
 </head>
 <body>
+
+    {% include 'header.twig' with {
+        'winkelmandjeAantal': winkelmandje|length,
+        'ingelogd': ingelogd
+    } %}
+    
     <h1>Afrekenen</h1>
 
     {% if foutmelding %}

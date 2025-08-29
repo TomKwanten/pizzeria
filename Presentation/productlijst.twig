@@ -6,6 +6,12 @@
     <title>Pizzeria - Producten</title>
 </head>
 <body>
+
+    {% include 'header.twig' with {
+        'winkelmandjeAantal': winkelmandje|length,
+        'ingelogd': ingelogd
+    } %}
+
     <h1>Ons aanbod pizza's</h1>
 
     <a href="winkelmandController.php">Ga naar winkelmandje</a>
