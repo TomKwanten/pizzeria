@@ -1,4 +1,5 @@
 <?php
+// afrekenenController.php
 declare(strict_types=1);
 
 require_once("init.php");
@@ -20,6 +21,8 @@ $productSvc = new ProductService();
 $foutmelding = '';
 $winkelmandje = [];
 $totaalPrijs = 0.0;
+// Leverbare postcodes
+$leverbarePostcodes = ['3600', '3665', '3690', '3660', '3590', '3630', '3650', '3530', '3670']; 
 
 // Winkelmandje samenstellen
 $winkelmandjeSession = $_SESSION['winkelmandje'] ?? [];
@@ -50,6 +53,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($actie === 'logout') {
         unset($_SESSION['klant']);
         $ingelogd = false;
+    } elseif ($actie === 'bevestig') {
+        // Controleer of de postcode leverbaar is
+        $postcode = $_POST['postcode'] ?? '';
+        if (!in_array($postcode, $leverbarePostcodes)) {
+            $foutmelding = "Sorry, we leveren niet in deze gemeente/postcode.";
+        } else {
+            // Geen fout, doorgaan naar bestelling bevestigen
+            $_SESSION['adres'] = [
+                'straat' => $_POST['straat'],
+                'huisnummer' => $_POST['huisnummer'],
+                'postcode' => $_POST['postcode'],
+                'gemeente' => $_POST['gemeente']
+            ];
+            header("Location: bestellingBevestigenController.php");
+            exit;
+        }
     }
 
     // Update ingelogd status
