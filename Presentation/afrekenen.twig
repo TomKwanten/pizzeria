@@ -59,12 +59,12 @@
         <p><strong>Totaalprijs: €{{ totaalPrijs|number_format(2, ',', '.') }}</strong></p>
 
         <h3>Adresgegevens</h3>
-        <form action="bestellingBevestigenController.php" method="post">
+        <form action="" method="post">
             <input type="text" name="straat" placeholder="Straat" value="{{ ingelogd.straat }}" required>
             <input type="text" name="huisnummer" placeholder="Huisnummer" value="{{ ingelogd.huisnummer }}" required>
             <input type="text" name="postcode" placeholder="Postcode" value="{{ ingelogd.postcode }}" required>
             <input type="text" name="gemeente" placeholder="Gemeente" value="{{ ingelogd.gemeente }}" required>
-            <button type="submit">Bevestig bestelling</button>
+            <button type="submit" name="actie" value="bevestig">Bevestig bestelling</button>
         </form>
     {% endif %}
 </body>
