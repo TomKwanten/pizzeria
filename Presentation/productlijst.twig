@@ -1,41 +1,48 @@
-<!DOCTYPE html>
 {# productlijst.twig #}
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Pizzeria - Producten</title>
-</head>
-<body>
+{% extends "layout.twig" %}
 
-    {% include 'header.twig' with {
-        'winkelmandjeAantal': winkelmandje|length,
-        'ingelogd': ingelogd
-    } %}
+{% block title %}Pizzeria - Producten{% endblock %}
 
-    <h1>Ons aanbod pizza's</h1>
+{% block content %}
 
-    <a href="winkelmandController.php">Ga naar winkelmandje</a>
+<h1>Ons aanbod pizza's</h1>
 
-    <ul>
-        {% for product in productenLijst %}
-            <li>
-                <strong>{{ product.getNaam() }}</strong> – €{{ product.getPrijs() }}
-                {% if product.getPromotieprijs() %}
-                    <span style="color: red;">Promo: €{{ product.getPromotieprijs() }}</span>
-                {% endif %}
-                {% if product.getBeschrijving() %}
-                    <p>{{ product.getBeschrijving() }}</p>
-                {% endif %}
+{# Compact overzicht van winkelmandje onder de header #}
+{% set totaalAantal = 0 %}
+{% for item in winkelmandje %}
+    {% set totaalAantal = totaalAantal + item.aantal %}
+{% endfor %}
+<h2>Winkelmandje ({{ totaalAantal }})</h2>
+<ul>
+    {% for item in winkelmandje %}
+        <li>{{ item.product.getNaam() }} - Aantal: {{ item.aantal }}</li>
+    {% else %}
+        <li>Je winkelmandje is leeg</li>
+    {% endfor %}
+</ul>
+<a href="winkelmandController.php">Bekijk winkelmandje</a>
 
-                <!-- Optioneel: direct toevoegen aan winkelmand -->
-                <form action="winkelmandController.php" method="post" style="display:inline">
-                    <input type="hidden" name="id" value="{{ product.getId() }}">
-                    <button type="submit" name="actie" value="toevoegen">Toevoegen aan mandje</button>
-                </form>
-            </li>
-        {% else %}
-            <li><em>Geen producten gevonden...</em></li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{# Productenlijst #}
+<ul>
+    {% for product in productenLijst %}
+        <li>
+            <strong>{{ product.getNaam() }}</strong> – €{{ product.getPrijs() }}
+            {% if product.getPromotieprijs() %}
+                <span style="color: red;">Promo: €{{ product.getPromotieprijs() }}</span>
+            {% endif %}
+            {% if product.getBeschrijving() %}
+                <p>{{ product.getBeschrijving() }}</p>
+            {% endif %}
+
+            {# Toevoegen aan winkelmandje #}
+            <form action="winkelmandController.php" method="post" style="display:inline">
+                <input type="hidden" name="id" value="{{ product.getId() }}">
+                <button type="submit" name="actie" value="toevoegen">Toevoegen aan mandje</button>
+            </form>
+        </li>
+    {% else %}
+        <li><em>Geen producten gevonden...</em></li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Pizzeria{% endblock %}</title>
+</head>
+<body>
+
+    {% include 'header.twig' with {
+        'winkelmandjeAantal': winkelmandje|length,
+        'ingelogd': ingelogd
+    } %}
+
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>© 2025 Pizzeria</p>
+    </footer>
+
+</body>
+</html>

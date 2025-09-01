@@ -1,50 +1,40 @@
-<!DOCTYPE html>
 {# winkelmand.twig #}
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Pizzeria - Winkelmandje</title>
-</head>
-<body>
+{% extends "layout.twig" %}
 
-    {% include 'header.twig' with {
-        'winkelmandjeAantal': winkelmandje|length,
-        'ingelogd': ingelogd
-    } %}
-    
-    <h1>Ons aanbod pizza's</h1>
-    <ul>
-        {% for product in productenLijst %}
-            <li>
-                <strong>{{ product.getNaam() }}</strong> – €{{ product.getPrijs() }}
-                {% if product.getPromotieprijs() %}
-                    <span style="color:red;">Promo: €{{ product.getPromotieprijs() }}</span>
-                {% endif %}
-                <form action="winkelmandController.php" method="post" style="display:inline">
-                    <input type="hidden" name="id" value="{{ product.getId() }}">
-                    <input type="number" name="aantal" value="1" min="1" style="width:50px;">
-                    <button type="submit" name="actie" value="toevoegen">Toevoegen</button>
-                </form>
-            </li>
-        {% endfor %}
-    </ul>
+{% block title %}Pizzeria - Winkelmandje{% endblock %}
 
-    <h2>Winkelmandje</h2>
-    {% if winkelmandje %}
-        <ul>
-            {% for item in winkelmandje %}
-                <li>
-                    {{ item.product.getNaam() }} - Aantal: {{ item.aantal }}
-                    <form action="winkelmandController.php" method="post" style="display:inline">
-                        <input type="hidden" name="id" value="{{ item.product.getId() }}">
-                        <button type="submit" name="actie" value="verwijderen">Verwijderen</button>
-                    </form>
-                </li>
-            {% endfor %}
-        </ul>
-        <a href="afrekenenController.php">Afrekenen</a>
+{% block content %}
+
+<h1>Ons aanbod pizza's</h1>
+
+<!-- Productenlijst om snel items toe te voegen -->
+<ul>
+    {% for product in productenLijst %}
+        <li>
+            <strong>{{ product.getNaam() }}</strong> – €{{ product.getPrijs() }}
+            <form action="winkelmandController.php" method="post" style="display:inline">
+                <input type="hidden" name="id" value="{{ product.getId() }}">
+                <button type="submit" name="actie" value="toevoegen">Toevoegen aan mandje</button>
+            </form>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Winkelmandje</h2>
+<ul>
+    {% for item in winkelmandje %}
+        <li>
+            {{ item.product.getNaam() }} - Aantal: {{ item.aantal }}
+            <form action="winkelmandController.php" method="post" style="display:inline">
+                <input type="hidden" name="id" value="{{ item.product.getId() }}">
+                <button type="submit" name="actie" value="verwijderen">Verwijderen</button>
+            </form>
+        </li>
     {% else %}
-        <p><em>Je winkelmandje is leeg</em></p>
-    {% endif %}
-</body>
-</html>
+        <li><em>Je winkelmandje is leeg</em></li>
+    {% endfor %}
+</ul>
+
+<a href="afrekenenController.php">Afrekenen</a>
+
+{% endblock %}
