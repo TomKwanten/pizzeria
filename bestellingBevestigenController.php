@@ -23,12 +23,14 @@ if (empty($winkelmandje)) {
     exit;
 }
 
-// Adresgegevens uit POST
-$straat = $_POST['straat'] ?? '';
-$huisnummer = $_POST['huisnummer'] ?? '';
-$postcode = $_POST['postcode'] ?? '';
-$gemeente = $_POST['gemeente'] ?? '';
-$adres = "$straat $huisnummer, $postcode $gemeente";
+// Adresgegevens (voorrang aan sessie, anders POST)
+$adresData = $_SESSION['adres'] ?? [
+    'straat' => $_POST['straat'] ?? '',
+    'huisnummer' => $_POST['huisnummer'] ?? '',
+    'postcode' => $_POST['postcode'] ?? '',
+    'gemeente' => $_POST['gemeente'] ?? ''
+];
+$adres = $adresData['straat'] . ' ' . $adresData['huisnummer'] . ', ' . $adresData['postcode'] . ' ' . $adresData['gemeente'];
 
 // Bestellijnen voorbereiden
 $productSvc = new ProductService();
@@ -47,10 +49,13 @@ foreach ($winkelmandje as $id => $aantal) {
 
 // Bestelling plaatsen via service
 $bestellingSvc = new BestellingService();
-$bestelling = $bestellingSvc->plaatsBestelling($klant->getId(), $adres, $bestellijnen);
+$nieuweBestelling = $bestellingSvc->plaatsBestelling($klant->getId(), $adres, $bestellijnen);
 
-// Winkelmandje leegmaken
-unset($_SESSION['winkelmandje']);
+// Winkelmandje + adres leegmaken
+unset($_SESSION['winkelmandje'], $_SESSION['adres']);
+
+// Bestelling opnieuw ophalen (nu mét Bestellijn-objecten)
+$bestelling = $bestellingSvc->haalBestellingOp($nieuweBestelling->getId());
 
 // Render Twig
 print $twig->render("bestellingBevestigd.twig", [

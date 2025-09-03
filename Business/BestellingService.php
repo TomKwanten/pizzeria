@@ -14,14 +14,6 @@ class BestellingService {
         $this->bestellingDAO = new BestellingDAO();
     }
 
-    /**
-     * Plaats een bestelling
-     *
-     * @param int $klantId
-     * @param string $adres
-     * @param array $winkelmandje Array van ['productId' => int, 'aantal' => int, 'prijs' => float]
-     * @return Bestelling
-     */
     public function plaatsBestelling(int $klantId, string $adres, array $winkelmandje): Bestelling {
         $totaalprijs = 0.0;
         foreach ($winkelmandje as $item) {

@@ -9,23 +9,21 @@
     <h1>Bedankt voor je bestelling!</h1>
 
     <h2>Bestellingsgegevens</h2>
-    <p><strong>Datum:</strong> {{ bestelling.datum }}</p>
-    <p><strong>Adres:</strong> {{ bestelling.adres }}</p>
-    <p><strong>Totaalprijs:</strong> €{{ bestelling.totaalprijs|number_format(2, ',', '.') }}</p>
+    <p><strong>Datum:</strong> {{ bestelling.getDatum() }}</p>
+    <p><strong>Adres:</strong> {{ bestelling.getAdres() }}</p>
+    <p><strong>Totaalprijs:</strong> €{{ bestelling.getTotaalprijs()|number_format(2, ',', '.') }}</p>
 
     <h3>Bestelde producten</h3>
     <ul>
-        {% for lijn in bestelling.bestellijnen %}
+        {% for lijn in bestelling.getBestellijnen() %}
             <li>
-                {{ lijn.productNaam }}  
-                - Aantal: {{ lijn.aantal }}  
-                - Prijs per stuk: €{{ lijn.prijs|number_format(2, ',', '.') }}
-                - Subtotaal: €{{ (lijn.prijs * lijn.aantal)|number_format(2, ',', '.') }}
+                {{ lijn.getProductNaam() }}  
+                Aantal: {{ lijn.getAantal() }}  
+                Prijs per stuk: €{{ lijn.getPrijs()|number_format(2, ',', '.') }}
+                Subtotaal: €{{ (lijn.getPrijs() * lijn.getAantal())|number_format(2, ',', '.') }}
             </li>
         {% endfor %}
     </ul>
-
-    <p><strong>Totaalprijs winkelmandje: €{{ bestelling.totaalprijs|number_format(2, ',', '.') }}</strong></p>
 
     <a href="index.php">Terug naar winkel</a>
 </body>
