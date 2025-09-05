@@ -2,16 +2,18 @@
 // productController.php
 declare(strict_types=1);
 
-// Start session zo vroeg mogelijk
-require_once("initSession.php"); // om session te starten
+// **Belangrijk:** eerst autoloader laden, zodat PHP classes kan vinden bij unserialize
+require_once("init.php");
+
+// Dan session starten
+require_once("initSession.php"); 
+
+// Daarna Twig initialiseren
+require_once("initTwig.php");
 
 // Toon altijd alle fouten
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-
-// Autoload en Twig
-require_once("init.php");
-require_once("initTwig.php");
 
 use Business\ProductService;
 

@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 require_once("init.php");
-require_once("initTwig.php");
 require_once("initSession.php");
+require_once("initTwig.php");
 
 use Business\ProductService;
 use Business\BestellingService;
