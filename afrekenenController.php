@@ -42,6 +42,9 @@ foreach ($winkelmandjeSession as $id => $aantal) {
 // Check of gebruiker ingelogd is
 $ingelogd = $_SESSION['klant'] ?? false;
 
+// Haal laatste gebruikte e-mail uit cookie
+$laatsteEmail = $_COOKIE['laatste_email'] ?? '';
+
 // POST-verwerking
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $actie = $_POST['actie'] ?? '';
@@ -80,16 +83,19 @@ print $twig->render("afrekenen.twig", [
     'winkelmandje' => $winkelmandje,
     'totaalPrijs' => $totaalPrijs,
     'ingelogd' => $ingelogd,
-    'foutmelding' => $foutmelding
+    'foutmelding' => $foutmelding,
+    'laatsteEmail' => $laatsteEmail,
 ]);
 
-// -------------------------
 // Functies
-// -------------------------
 function loginKlant(KlantService $svc, string $email, string $wachtwoord): string {
     try {
         $klant = $svc->login($email, $wachtwoord);
         $_SESSION['klant'] = $klant;
+
+        // Cookie instellen voor laatste e-mail, 30 dagen geldig
+        setcookie('laatste_email', $email, time() + (30*24*60*60), "/");
+
         return '';
     } catch (GebruikerBestaatNietException) {
         return "Deze gegevens zijn nog niet bekend. Registreer eerst een account.";
