@@ -1,4 +1,5 @@
-<?php
+<?php 
+// init.php
 declare(strict_types=1);
 
 // Autoloader voor je project classes

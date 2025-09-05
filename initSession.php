@@ -1,4 +1,5 @@
 <?php
+// initSession.php
 declare(strict_types=1);
 
 // Start session direct, vóórdat er iets naar de browser gestuurd wordt
