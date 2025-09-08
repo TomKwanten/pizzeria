@@ -4,24 +4,35 @@
 {% block title %}Wie zijn wij{% endblock %}
 
 {% block content %}
-<h1>Over onze pizzeria</h1>
+<div class="container">
 
-<p>Welkom bij onze pizzeria!</p>
-<p>Wij streven ernaar om elke pizza met liefde en verse ingrediënten te bereiden. 
-   Onze missie is een heerlijke maaltijd bezorgen, 
-   zodat je thuis kan genieten van echte Italiaanse smaken.
-</p>
+    <h1>Over onze pizzeria</h1>
 
-<h2>Lopende promoties</h2>
-<ul>
-    <li>Elke vrijdag: 2 pizza’s voor de prijs van 1!</li>
-    <li>Gratis dessert bij een bestelling vanaf €30.</li>
-</ul>
+    <div class="info-section">
+        <p>Welkom bij onze pizzeria!</p>
+        <p>Wij streven ernaar om elke pizza met liefde en verse ingrediënten te bereiden. 
+        Onze missie is een heerlijke maaltijd bezorgen, zodat je thuis kan genieten van echte Italiaanse smaken.</p>
+    </div>
 
-<h2>Voorwaarden</h2>
-<p>We leveren alleen in de gemeenten en postcodes die op de afrekenpagina vermeld staan. Bestellingen dienen minimaal 30 minuten voor levering geplaatst te worden.</p>
+    <div class="promo-section">
+        <h2>Lopende promoties</h2>
+        <div class="promo-cards">
+            <div class="promo-card">Elke vrijdag: 2 pizza’s voor de prijs van 1!</div>
+            <div class="promo-card">Gratis dessert bij een bestelling vanaf €30.</div>
+        </div>
+    </div>
 
-<h2>Contact</h2>
-<p>Telefoon: 012 345 6789</p>
-<p>Email: info@pizzeria.be</p>
+    <div class="voorwaarden-section">
+        <h2>Voorwaarden</h2>
+        <p>We leveren alleen in de gemeenten en postcodes die op de afrekenpagina vermeld staan. Bestellingen dienen minimaal 30 minuten voor levering geplaatst te worden.</p>
+    </div>
+
+    <div class="contact-section">
+        <h2>Contact</h2>
+        <p><strong>Telefoon:</strong> 012 345 6789</p>
+        <p><strong>Email:</strong> info@pizzeria.be</p>
+    </div>
+
+</div>
 {% endblock %}
+

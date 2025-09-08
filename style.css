@@ -1,0 +1,536 @@
+/* =================== BASISSTIJL =================== */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* =================== HEADER =================== */
+header {
+    background-color: #fff;
+    border-bottom: 2px solid #eee;
+    padding: 1rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+header nav {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+header nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+header nav a:hover {
+    color: #2e7d32;
+}
+
+/* ==== Extra header classes ==== */
+.main-nav {
+    align-items: center;
+    font-weight: 500;
+}
+
+.separator {
+    color: #ccc;
+    margin: 0 0.5rem;
+}
+
+.welcome {
+    font-weight: 600;
+    margin-left: 1rem;
+    color: #c62828;
+}
+
+.logout-form {
+    display: inline;
+    margin-left: 0.5rem;
+}
+
+.logout-form .btn-red {
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+}
+
+.login-link {
+    font-weight: 600;
+    color: #c62828;
+}
+
+.login-link:hover {
+    color: #2e7d32;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 0;
+}
+
+/* =================== BUTTONS =================== */
+.btn {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-red {
+    background-color: #c62828;
+    color: #fff;
+}
+
+.btn-red:hover {
+    background-color: #b71c1c;
+}
+
+.btn-green {
+    background-color: #2e7d32;
+    color: #fff;
+}
+
+.btn-green:hover {
+    background-color: #1b5e20;
+}
+
+.btn-small {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+}
+
+/* =================== PRODUCT GRID ALGEMEEN =================== */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+}
+
+.product-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+/* =================== PRODUCT GRID VISUAL =================== */
+.producten-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+    justify-items: center;
+}
+
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 220px;     
+    height: 340px;    
+
+    border-radius: 12px;
+    border: 1px solid #eee;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    text-align: center;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: contain; 
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+}
+
+.product-card .content {
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0.8rem;
+    gap: 0.4rem;
+}
+
+.product-card .content strong {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.product-card .content .prijs {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #2e7d32;
+}
+
+.product-card .content .prijs .old {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 0.3rem;
+}
+
+.product-card .content p {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0.2rem 0 0 0;
+}
+
+/* Knop altijd onderaan */
+.product-card form {
+    margin-top: auto;
+    width: 100%;
+}
+
+
+/* =================== WINKELMAND & PRODUCTENLIJST =================== */
+.producten-lijst,
+.winkelmand-lijst {
+    list-style: none;
+    padding: 0.5rem;
+    margin: 1rem 0;
+}
+
+.product-item,
+.winkelmand-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.product-item:hover,
+.winkelmand-item:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.inline-form {
+    display: inline;
+    margin-left: 0.5rem;
+}
+
+/* Winkelmand totaal */
+.cart-total {
+    text-align: right;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+/* =================== MINI WINKELMANDJE GRID =================== */
+.mini-winkelmand-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 0.1rem;
+    margin-bottom: 1rem;
+}
+
+.mini-winkelmand-item {
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between; 
+    align-items: center;
+    text-align: center;
+
+    width: 90px;        
+    height: 190px;       
+    padding: 0.8rem;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.mini-winkelmand-item img.mini-thumb {
+    width: 100px;
+    height: 90px;
+    object-fit: contain; /* geen afgesneden randen */
+    margin-bottom: 0.5rem;
+}
+
+.mini-winkelmand-item span {
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.mini-winkelmand-item .inline-form {
+    margin-top: auto; /* duwt de knop helemaal naar onder */
+    display: flex;
+    justify-content: center;
+}
+
+/* =================== LOGIN & REGISTRATIE =================== */
+.auth-card {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+    max-width: 500px;
+    margin: 2rem auto;
+}
+
+.auth-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+.auth-tabs .tab {
+    flex: 1;
+    padding: 0.6rem;
+    border: none;
+    border-radius: 8px;
+    background: #eee;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.auth-tabs .tab.active {
+    background: #2e7d32;
+    color: #fff;
+}
+
+.auth-form {
+    display: none;
+}
+
+.auth-form.active {
+    display: block;
+}
+
+.auth-form label {
+    display: block;
+    font-weight: 600;
+    margin-top: 0.8rem;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-top: 0.3rem;
+    font-size: 1rem;
+}
+
+.auth-form button {
+    margin-top: 1.2rem;
+    width: 100%;
+}
+
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.alert-red {
+    background: #fdd;
+    color: #900;
+    border: 1px solid #e99;
+}
+
+.alert-green {
+    background: #dfffe0;
+    color: #155724;
+    border: 1px solid #a8e5b0;
+    padding: 0.8rem;
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+/* =================== AFREKENEN FORMULIER =================== */
+.checkout-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.checkout-form label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+.checkout-form input, 
+.checkout-form select {
+    width: 100%;
+    padding: 0.6rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+.checkout-summary {
+    border-left: 2px solid #eee;
+    padding-left: 1.5rem;
+}
+
+/* =================== BESTELLING BEVESTIGD =================== */
+.confirmation {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.confirmation h1 {
+    font-size: 2rem;
+    color: #2e7d32;
+    margin-bottom: 1rem;
+}
+
+.confirmation p {
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+.order-summary {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.order-items ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.order-item {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.8rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.order-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.order-item .product-name {
+    font-weight: 600;
+}
+
+.order-item .subtotal {
+    font-weight: 700;
+    color: #c62828;
+}
+
+/* =================== EXTRA PAGINA STYLING =================== */
+.info-section,
+.promo-section,
+.voorwaarden-section,
+.contact-section {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.promo-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.promo-card {
+    flex: 1 1 200px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1rem;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.contact-section p {
+    margin: 0.3rem 0;
+}
+
+/* =================== FOOTER =================== */
+.site-footer {
+    background: #f9f9f9;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* =================== RESPONSIVE GRID =================== */
+@media (max-width: 768px) {
+    .producten-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 1rem; }
+    .product-card img { height: 150px; }
+}
+
+@media (max-width: 480px) {
+    .producten-grid { grid-template-columns: 1fr; }
+    .product-card img { height: 180px; }
+}

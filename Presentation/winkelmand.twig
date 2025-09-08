@@ -4,37 +4,43 @@
 {% block title %}Pizzeria - Winkelmandje{% endblock %}
 
 {% block content %}
+<div class="container">
 
-<h1>Ons aanbod pizza's</h1>
+    <h1>Ons aanbod pizza's</h1>
 
-<!-- Productenlijst om snel items toe te voegen -->
-<ul>
-    {% for product in productenLijst %}
-        <li>
-            <strong>{{ product.getNaam() }}</strong> – €{{ product.getPrijs() }}
-            <form action="winkelmandController.php" method="post" style="display:inline">
-                <input type="hidden" name="id" value="{{ product.getId() }}">
-                <button type="submit" name="actie" value="toevoegen">Toevoegen aan mandje</button>
-            </form>
-        </li>
-    {% endfor %}
-</ul>
+    <!-- Productenlijst als grid met kaarten -->
+    <div class="producten-grid">
+        {% for product in productenLijst %}
+            <div class="product-card">
+                <img src="img/{{ product.getNaam()|lower|replace({' ': '_'}) }}.png" alt="{{ product.getNaam() }}">
+                <div class="content">
+                    <strong>{{ product.getNaam() }}</strong>€{{ product.getPrijs() }}
+                    <form action="winkelmandController.php" method="post" class="inline-form">
+                        <input type="hidden" name="id" value="{{ product.getId() }}">
+                        <button type="submit" name="actie" value="toevoegen" class="btn btn-red">Toevoegen</button>
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-<h2>Winkelmandje</h2>
-<ul>
-    {% for item in winkelmandje %}
-        <li>
-            {{ item.product.getNaam() }} - Aantal: {{ item.aantal }}
-            <form action="winkelmandController.php" method="post" style="display:inline">
-                <input type="hidden" name="id" value="{{ item.product.getId() }}">
-                <button type="submit" name="actie" value="verwijderen">Verwijderen</button>
-            </form>
-        </li>
-    {% else %}
-        <li><em>Je winkelmandje is leeg</em></li>
-    {% endfor %}
-</ul>
+    <h2>Winkelmandje</h2>
+    <ul class="winkelmand-lijst">
+        {% for item in winkelmandje %}
+            <li class="winkelmand-item">
+                {{ item.product.getNaam() }} - Aantal: {{ item.aantal }}
+                <form action="winkelmandController.php" method="post" class="inline-form">
+                    <input type="hidden" name="id" value="{{ item.product.getId() }}">
+                    <button type="submit" name="actie" value="verwijderen" class="btn btn-red">Verwijderen</button>
+                </form>
+            </li>
+        {% else %}
+            <li><em>Je winkelmandje is leeg</em></li>
+        {% endfor %}
+    </ul>
 
-<a href="afrekenenController.php">Afrekenen</a>
+    <a href="afrekenenController.php" class="btn btn-green">Afrekenen</a>
 
+</div>
 {% endblock %}
+

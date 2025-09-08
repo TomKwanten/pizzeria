@@ -1,17 +1,26 @@
 {# header.twig #}
-<header style="margin-bottom: 20px;">
-    <nav>
-        <a href="productController.php">Producten</a> |
-        <a href="wieZijnWijController.php">Wie zijn wij</a> |
-        <a href="winkelmandController.php">Winkelmandje ({{ winkelmandjeAantal|default(0) }})</a> |
-        {% if ingelogd %}
-            <span>Welkom, {{ ingelogd.voornaam }}</span>
-            <form action="afrekenenController.php" method="post" style="display:inline">
-                <button type="submit" name="actie" value="logout">Uitloggen</button>
-            </form>
-        {% else %}
-            <a href="afrekenenController.php">Login / Registreren</a>
-        {% endif %}
-    </nav>
+<header class="site-header">
+    <div class="container header-inner">
+        <nav class="main-nav">
+            <a href="productController.php" class="nav-link">Producten</a>
+            <span class="separator">|</span>
+            <a href="wieZijnWijController.php" class="nav-link">Wie zijn wij</a>
+            <span class="separator">|</span>
+            <a href="winkelmandController.php" class="nav-link">
+                Winkelmandje ({{ winkelmandjeAantal|default(0) }})
+            </a>
+            <span class="separator">|</span>
+            
+            {% if ingelogd %}
+                <span class="welcome">Welkom, {{ ingelogd.voornaam }}</span>
+                <form action="afrekenenController.php" method="post" class="logout-form">
+                    <button type="submit" name="actie" value="logout" class="btn btn-red">Uitloggen</button>
+                </form>
+            {% else %}
+                <a href="afrekenenController.php" class="nav-link login-link">Login / Registreren</a>
+            {% endif %}
+        </nav>
+    </div>
 </header>
-<hr>
+<hr class="divider">
+

@@ -1,71 +1,113 @@
-<!DOCTYPE html>
-<!-- afrekenen.twig -->
-<html lang="nl">
-<head>
-    <meta charset="UTF-8">
-    <title>Afrekenen</title>
-</head>
-<body>
+{% extends "layout.twig" %}
 
-    {% include 'header.twig' with {
-        'winkelmandjeAantal': winkelmandje|length,
-        'ingelogd': ingelogd
-    } %}
-    
+{% block title %}Pizzeria - Afrekenen{% endblock %}
+
+{% block content %}
+<div class="container">
+
     <h1>Afrekenen</h1>
 
     {% if foutmelding %}
-        <p style="color:red;">{{ foutmelding }}</p>
+        <div class="alert alert-red">{{ foutmelding }}</div>
+    {% endif %}
+
+    {% if succesmelding %}
+        <div class="alert alert-green">{{ succesmelding }}</div>
     {% endif %}
 
     {% if not ingelogd %}
-        <h2>Login of registreer</h2>
+        <div class="auth-card">
+            <h2>Login of registreer</h2>
 
-        <!-- LOGIN FORMULIER -->
-        <form action="" method="post">
-            <h3>Ik heb een account</h3>
-            <input type="email" name="email" placeholder="E-mail" value="{{ laatsteEmail }}" required>
-            <input type="password" name="wachtwoord" placeholder="Wachtwoord" required>
-            <button type="submit" name="actie" value="login">Login</button>
-        </form>
+            <div class="auth-tabs">
+                <button class="tab active" onclick="showTab('login')">Login</button>
+                <button class="tab" onclick="showTab('register')">Registreren</button>
+            </div>
 
-        <!-- REGISTRATIE FORMULIER -->
-        <form action="" method="post">
-            <h3>Ik heb geen account</h3>
-            <input type="text" name="voornaam" placeholder="Voornaam" required>
-            <input type="text" name="naam" placeholder="Naam" required>
-            <input type="text" name="straat" placeholder="Straat" required>
-            <input type="text" name="huisnummer" placeholder="Huisnummer" required>
-            <input type="text" name="postcode" placeholder="Postcode" required>
-            <input type="text" name="gemeente" placeholder="Gemeente" required>
-            <input type="text" name="telefoon" placeholder="Telefoon">
-            <input type="email" name="email" placeholder="E-mail" required>
-            <input type="password" name="wachtwoord" placeholder="Wachtwoord" required>
-            <button type="submit" name="actie" value="registratie">Registreer</button>
-        </form>
+            <!-- LOGIN FORMULIER -->
+            <div id="login" class="auth-form active">
+                <form action="" method="post">
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" value="{{ laatsteEmail }}" required>
+
+                    <label for="wachtwoord">Wachtwoord</label>
+                    <input type="password" name="wachtwoord" id="wachtwoord" required>
+
+                    <button type="submit" name="actie" value="login" class="btn btn-green">Login</button>
+                </form>
+            </div>
+
+            <!-- REGISTRATIE FORMULIER -->
+            <div id="register" class="auth-form">
+                <form action="" method="post">
+                    <label for="voornaam">Voornaam</label>
+                    <input type="text" name="voornaam" id="voornaam" required>
+
+                    <label for="naam">Naam</label>
+                    <input type="text" name="naam" id="naam" required>
+
+                    <label for="straat">Straat</label>
+                    <input type="text" name="straat" id="straat" required>
+
+                    <label for="huisnummer">Huisnummer</label>
+                    <input type="text" name="huisnummer" id="huisnummer" required>
+
+                    <label for="postcode">Postcode</label>
+                    <input type="text" name="postcode" id="postcode" required>
+
+                    <label for="gemeente">Gemeente</label>
+                    <input type="text" name="gemeente" id="gemeente" required>
+
+                    <label for="telefoon">Telefoon</label>
+                    <input type="text" name="telefoon" id="telefoon">
+
+                    <label for="email">E-mail</label>
+                    <input type="email" name="email" id="email" required>
+
+                    <label for="wachtwoord">Wachtwoord</label>
+                    <input type="password" name="wachtwoord" id="wachtwoord" required>
+
+                    <button type="submit" name="actie" value="registratie" class="btn btn-red">Registreer</button>
+                </form>
+            </div>
+        </div>
     {% else %}
-        <form action="" method="post" style="margin-bottom: 20px;">
-            <button type="submit" name="actie" value="logout">Uitloggen</button>
+        <form action="" method="post" class="logout-form">
+            <button type="submit" name="actie" value="logout" class="btn btn-red">Uitloggen</button>
         </form>
-        <h2>Overzicht winkelmandje</h2>
-        <ul>
-            {% set totaalPrijs = 0 %}
-            {% for item in winkelmandje %}
-                {% set subtotaal = item.aantal * item.prijs %}
-                <li>{{ item.product.getNaam() }} - Aantal: {{ item.aantal }} - €{{ subtotaal|number_format(2, ',', '.') }}</li>
-                {% set totaalPrijs = totaalPrijs + subtotaal %}
-            {% endfor %}
-        </ul>
-        <p><strong>Totaalprijs: €{{ totaalPrijs|number_format(2, ',', '.') }}</strong></p>
 
-        <h3>Adresgegevens</h3>
-        <form action="" method="post">
-            <input type="text" name="straat" placeholder="Straat" value="{{ ingelogd.straat }}" required>
-            <input type="text" name="huisnummer" placeholder="Huisnummer" value="{{ ingelogd.huisnummer }}" required>
-            <input type="text" name="postcode" placeholder="Postcode" value="{{ ingelogd.postcode }}" required>
-            <input type="text" name="gemeente" placeholder="Gemeente" value="{{ ingelogd.gemeente }}" required>
-            <button type="submit" name="actie" value="bevestig">Bevestig bestelling</button>
-        </form>
+        <div class="auth-card">
+            <h2>Overzicht winkelmandje</h2>
+            <ul class="winkelmand-lijst">
+                {% set totaalPrijs = 0 %}
+                {% for item in winkelmandje %}
+                    {% set subtotaal = item.aantal * item.prijs %}
+                    <li>{{ item.product.getNaam() }} - Aantal: {{ item.aantal }} - 
+                        €{{ subtotaal|number_format(2, ',', '.') }}
+                    </li>
+                    {% set totaalPrijs = totaalPrijs + subtotaal %}
+                {% endfor %}
+            </ul>
+            <p><strong>Totaalprijs: €{{ totaalPrijs|number_format(2, ',', '.') }}</strong></p>
+
+            <h3>Adresgegevens</h3>
+            <form action="" method="post">
+                <input type="text" name="straat" placeholder="Straat" value="{{ ingelogd.straat }}" required>
+                <input type="text" name="huisnummer" placeholder="Huisnummer" value="{{ ingelogd.huisnummer }}" required>
+                <input type="text" name="postcode" placeholder="Postcode" value="{{ ingelogd.postcode }}" required>
+                <input type="text" name="gemeente" placeholder="Gemeente" value="{{ ingelogd.gemeente }}" required>
+                <button type="submit" name="actie" value="bevestig" class="btn btn-green">Bevestig bestelling</button>
+            </form>
+        </div>
     {% endif %}
-</body>
-</html>
+</div>
+
+<script>
+function showTab(tab) {
+    document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(tab).classList.add('active');
+    document.querySelector(`.tab[onclick="showTab('${tab}')"]`).classList.add('active');
+}
+</script>
+{% endblock %}

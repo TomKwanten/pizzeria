@@ -19,6 +19,7 @@ $klantSvc = new KlantService();
 $productSvc = new ProductService();
 
 $foutmelding = '';
+$succesmelding = '';
 $winkelmandje = [];
 $totaalPrijs = 0.0;
 // Leverbare postcodes
@@ -51,8 +52,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($actie === 'login') {
         $foutmelding = loginKlant($klantSvc, $_POST['email'], $_POST['wachtwoord']);
+        if ($foutmelding === '') {
+            $succesmelding = "Welkom terug, je bent succesvol ingelogd!";
+        }
     } elseif ($actie === 'registratie') {
         $foutmelding = registreerKlant($klantSvc, $_POST);
+        if ($foutmelding === '') {
+            $succesmelding = "Je account werd succesvol aangemaakt, je bent nu ingelogd.";
+        }
     } elseif ($actie === 'logout') {
         unset($_SESSION['klant']);
         $ingelogd = false;
@@ -84,6 +91,7 @@ print $twig->render("afrekenen.twig", [
     'totaalPrijs' => $totaalPrijs,
     'ingelogd' => $ingelogd,
     'foutmelding' => $foutmelding,
+    'succesmelding' => $succesmelding,
     'laatsteEmail' => $laatsteEmail,
 ]);
 

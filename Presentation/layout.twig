@@ -3,7 +3,14 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <title>{% block title %}Pizzeria{% endblock %}</title>
+    <title>{% block title %}Pizzeria Bella{% endblock %}</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Stylesheet (maar 1 keer laden hier) -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
@@ -16,7 +23,7 @@
         {% block content %}{% endblock %}
     </div>
 
-    <footer>
+    <footer class="site-footer">
         <p>© 2025 Pizzeria</p>
     </footer>
 
